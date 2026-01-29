@@ -9,11 +9,14 @@ on:
 jobs:
   update-videos:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
         
       - name: Set up Node.js
@@ -26,16 +29,8 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node update-videos.js
         
-      - name: Commit and push if changed
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git fetch origin main
-          git add index.html
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "🎬 Auto-update: New videos for week $(date +%V)"
-            git pull --rebase origin main
-            git push origin main
-          fi
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '🎬 Auto-update: New videos for week ${{ github.run_number }}'
+          file_pattern: 'index.html'
