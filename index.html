@@ -76,14 +76,12 @@ border-left: 4px solid #2196f3;
 <div id="videos" class="videos-grid"></div>
 
 <script>
-//
-const API_KEY = 
+// ⚠️ ADD YOUR YOUTUBE API KEY HERE
+const API_KEY = 'AIzaSyBCQeWO5lhHka-2hvUeNyG2Kojqnum8eRc';
 
-// CACHED VIDEO IDs - These are updated automatically every Monday
-// Last updated: Week 8
-const CACHED_VIDEOS = [
-
-];
+// CACHED VIDEO IDs - These are updated manually each month
+// Last updated: Week 5
+const CACHED_VIDEOS = [];
 
 // Search queries in different languages for "day in the life" worker videos
 const searchQueries = [
@@ -113,6 +111,8 @@ const searchQueries = [
 'يوم في الحياة عمل', // Arabic
 'dag in het leven werk', // Dutch
 'dzień w życiu praca', // Polish
+'how I dey work', // Nigerian Pidgin
+'my work for Nigeria', // Nigerian Pidgin variant
 'วันทำงานของฉัน', // Thai
 'एक दिन मेरी नौकरी', // Hindi
 'mijn dagelijks werk', // Dutch variant
@@ -157,17 +157,17 @@ async function fetchNewVideos() {
 console.log('Fetching new videos from YouTube API...');
 const weekNumber = getWeekNumber(new Date());
 
-// Select 4 random queries based on week number (more queries for better diversity)
+// Select 10 random queries based on week number
 const seed = weekNumber * 1000;
 const shuffledQueries = [...searchQueries].sort(() => seededRandom(seed + Math.random() * 100) - 0.5);
-const selectedQueries = shuffledQueries.slice(0, 4);
+const selectedQueries = shuffledQueries.slice(0, 10);  // Use 10 languages
 
 console.log('Week:', weekNumber, 'Selected queries:', selectedQueries);
 
 // Fetch videos from selected queries
 const allVideos = [];
 for (const query of selectedQueries) {
-const videos = await searchYouTube(query, 10);
+const videos = await searchYouTube(query, 50);  // 50 videos per language
 allVideos.push(...videos);
 }
 
@@ -175,8 +175,8 @@ allVideos.push(...videos);
 const uniqueVideos = Array.from(new Map(allVideos.map(v => [v.id.videoId, v])).values());
 const shuffledVideos = uniqueVideos.sort(() => seededRandom(seed + 500) - 0.5);
 
-// Select EXACTLY 12 videos
-const selectedVideos = shuffledVideos.slice(0, 12);
+// Select EXACTLY 48 videos
+const selectedVideos = shuffledVideos.slice(0, 48);  // Display 48 videos
 
 console.log(`Selected ${selectedVideos.length} videos for display`);
 
@@ -212,20 +212,20 @@ try {
 const currentWeek = getWeekNumber(new Date());
 
 // Check if we have cached videos
-if (CACHED_VIDEOS.length === 12) {
-console.log('Using cached videos from GitHub Actions');
+if (CACHED_VIDEOS.length === 48) {  // Changed to 48
+console.log('Using cached videos');
 displayVideos(CACHED_VIDEOS);
 } else {
 // No cached videos or cache is incomplete - fetch new ones
 console.log('No cached videos found, fetching from API...');
-console.log('⚠️ WARNING: This uses API quota! GitHub Actions should populate the cache automatically.');
+console.log('⚠️ WARNING: This uses API quota!');
 
 const newVideos = await fetchNewVideos();
 displayVideos(newVideos);
 
 // Log the new cache data that should be copied into the code
 console.log('='.repeat(80));
-console.log('📋 GITHUB ACTIONS WILL AUTO-UPDATE THIS:');
+console.log('📋 COPY THIS INTO YOUR CODE:');
 console.log('='.repeat(80));
 console.log(`const CACHED_VIDEOS = ${JSON.stringify(newVideos, null, 2)};`);
 console.log('');
@@ -242,6 +242,10 @@ console.error('Error:', error);
 }
 
 // Load videos when page loads
+loadVideos();
+</script>
+</body>
+</html>
 loadVideos();
 </script>
 </body>
