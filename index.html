@@ -80,7 +80,200 @@ border-left: 4px solid #2196f3;
 const API_KEY = 'AIzaSyBCQeWO5lhHka-2hvUeNyG2Kojqnum8eRc';
 
 // CACHED VIDEO IDs - These are updated manually each month
-const CACHED_VIDEOS = [];
+const CACHED_VIDEOS = [
+  {
+    "videoId": "UiPQ1k1lIog",
+    "title": "Ide Kreatif Serta Tips Untuk Mempermudah Pekerjaan Sehari Hari"
+  },
+  {
+    "videoId": "1mRUkGf-1Zc",
+    "title": "İşyerinde bir gün"
+  },
+  {
+    "videoId": "pSkDxJC4rFY",
+    "title": "عايز اكون نـاجـح | ابراهيم الفقي"
+  },
+  {
+    "videoId": "WVooK4p_JTE",
+    "title": "วันทำงานของฉัน"
+  },
+  {
+    "videoId": "K5j-6x2XleM",
+    "title": "安妮日记#18：开工大吉！我的工作日常！可爱的小伙伴们 WEEKLY VLOG | ANNBITION"
+  },
+  {
+    "videoId": "l3QBCivO10A",
+    "title": "【夜中まで仕事】外資系コンサルの1日 #shorts"
+  },
+  {
+    "videoId": "FvuVVsqY_xE",
+    "title": "Pracuję w dwóch pracach na raz w wieku 20 lat - oto mój dzień"
+  },
+  {
+    "videoId": "TpVO3Xh7xpU",
+    "title": "Organiza tu vida, trabajo, deporte + tips de estudio *ESTO TE VA A MOTIVAR"
+  },
+  {
+    "videoId": "xokT_QAAF3k",
+    "title": "วันทำงานของฉัน"
+  },
+  {
+    "videoId": "bCr0kL4lzcE",
+    "title": "🇬🇧 Work Vlog l 我的工作日常"
+  },
+  {
+    "videoId": "TUI5ILZIcqU",
+    "title": "営業マン👩🏻‍💻🌟仕事の日の1日VLOG✍🏻🎀土日も仕事📞 #仕事女子"
+  },
+  {
+    "videoId": "Slpkypp0NXU",
+    "title": "Trik mudah pekerjaan sehari-hari #trending #shortfeed #shorts"
+  },
+  {
+    "videoId": "Bc66AmuWxaI",
+    "title": "vlog ｜ 宅家工作日常 ｜ 我的工作区布置 ｜ 提高工作专注度小分享"
+  },
+  {
+    "videoId": "BZqwwgywf74",
+    "title": "African American Prophetic Praise Medley out now! Worldwide 🌎 e dey work @henrisoul x @yvonnesdiary"
+  },
+  {
+    "videoId": "2ZAeeNsvKZ4",
+    "title": "今天给大家分享一条我的工作日常vlog   平时不游玩时候我每天都是这样度过的 哈哈哈 忙里忙外 一天会过得很快  做着自己喜欢的工作 在忙在累也觉得好快乐好充实  还是那句话 你爱生活 生活才..."
+  },
+  {
+    "videoId": "T0RI8yb1AdU",
+    "title": "ASÍ ES UN DÍA DE TRABAJO EN MI VIDA"
+  },
+  {
+    "videoId": "vzjghAfjFfE",
+    "title": "Canbay &amp; Wolker - İşimi Ver (Official Video) ft. Aşıl"
+  },
+  {
+    "videoId": "FORqhYoCKZc",
+    "title": "Cinco formas de usar la IA hoy en tu trabajo diario"
+  },
+  {
+    "videoId": "F5gZtuX-mWI",
+    "title": "Musisz przychodzić do pracy 15min przed czasem? 🤔 #prawo #praca #polska #życie #pracownik"
+  },
+  {
+    "videoId": "uCEwz1VqaUA",
+    "title": "Un Muy Tipico Dia En Mi Vida (Comida/Entrenó/Trabajo)"
+  },
+  {
+    "videoId": "hnwK2lZ1lwM",
+    "title": "يوم بحياة طالبة طب - Night Shift 👩🏻‍⚕️🩺"
+  },
+  {
+    "videoId": "uQUoOjYU3XY",
+    "title": "BIPA LEVEL 1 : AKTIVITAS SEHARI-HARI"
+  },
+  {
+    "videoId": "rTUFpwFTDqU",
+    "title": "วันทำงานของฉัน"
+  },
+  {
+    "videoId": "qfGZGQqwZDw",
+    "title": "我的工作日常"
+  },
+  {
+    "videoId": "dodjz7AlVo4",
+    "title": "Dzień z życia programisty - jak wygląda dzień pracy?"
+  },
+  {
+    "videoId": "ceG9X1kHq8A",
+    "title": "Okullar bir gün tatil olunca ben🫣 #mintiii #mintiveozgur"
+  },
+  {
+    "videoId": "36ZhLqkYKA8",
+    "title": "ในวันทำงานของฉัน"
+  },
+  {
+    "videoId": "VBHezvw-S_k",
+    "title": "Mi trabajo diario"
+  },
+  {
+    "videoId": "C-85Dt7DXGA",
+    "title": "マイクロソフト社員の1日の仕事"
+  },
+  {
+    "videoId": "XtZglrWHRic",
+    "title": "JAK WYGLĄDA PRACA KURIERA INPOST? Tysiąc paczek dziennie?! | DO ROBOTY"
+  },
+  {
+    "videoId": "P4FYfHfo-1o",
+    "title": "What a typical day of a programmer can look like 💻 #coder #softwareengineer"
+  },
+  {
+    "videoId": "pCC513KhDbc",
+    "title": "OFİSE DAHA YENİ GELDİK YA NE YEMEĞİ! | Tiktok İzliyoruz | HYPE"
+  },
+  {
+    "videoId": "NJ_HDmxO5jk",
+    "title": "E DEY WORK (feat. Yvonne)"
+  },
+  {
+    "videoId": "S_8-_7vs1FE",
+    "title": "たった1日で仕事を辞めた理由 #shorts"
+  },
+  {
+    "videoId": "ub3u_jLibuQ",
+    "title": "SAMSONG - E DEY WORK (OFFICIAL VIDEO)"
+  },
+  {
+    "videoId": "MbnritLn7Sc",
+    "title": "vacantes para trabajar desde casa empacar huevos. #empleo #convocatorias #empleos #trabajos"
+  },
+  {
+    "videoId": "lYm_2U53NHo",
+    "title": "bersih-bersih rumah sederhana || buat jadwal pekerjaan sehari-hari"
+  },
+  {
+    "videoId": "RHzcwjAutqQ",
+    "title": "un día de trabajo en mi vida COMO INFLUENCER"
+  },
+  {
+    "videoId": "UW3sHKqcXLY",
+    "title": "كيف انجح في حياتي او عملي"
+  },
+  {
+    "videoId": "xIjHFadkvEc",
+    "title": "benimle bir gün #keşfet #university #vlog #benimlebirgün #reklam #okul"
+  },
+  {
+    "videoId": "IpyC4semElo",
+    "title": "DESCUBRIENDO SECRETOS - CUADERNO DE TRABAJO DIARIO - NIVEL MEDIO"
+  },
+  {
+    "videoId": "xViOvWM61D0",
+    "title": "Oración para bendecir el trabajo diario ✨💼 | Dios abre caminos"
+  },
+  {
+    "videoId": "BBTTXWgxu-k",
+    "title": "วันทำงานของฉัน"
+  },
+  {
+    "videoId": "atXfFEmWDgU",
+    "title": "Jak wygląda typowy dzień pracy w Japonii? [Jestem z Polski]"
+  },
+  {
+    "videoId": "Rocdnx2UlNo",
+    "title": "Pekerjaan sehari-hari yang menemani para lelaki | HARTA TAHTA WANITA"
+  },
+  {
+    "videoId": "HI26tn1yw8U",
+    "title": "👨‍💻💚 يوم من حياة مبرمج شغال من البيت - A day in the life of a programmer working from home"
+  },
+  {
+    "videoId": "BmXoGybSSBk",
+    "title": "E dey work - Henrisoul x Yvonne (Excerpt form African American Prophetic Praise Medley)"
+  },
+  {
+    "videoId": "Isc0mY69pjQ",
+    "title": "「むぎのナース仕事の1日に密着」#cat #バイト #マンチカン #cute #動物 #猫 #shorts"
+  }
+];
 
 // Search queries in different languages for "day in the life" worker videos
 const searchQueries = [
