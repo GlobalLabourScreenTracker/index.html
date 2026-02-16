@@ -157,21 +157,26 @@ async function fetchNewVideos() {
 console.log('Fetching new videos from YouTube API...');
 
 // Use current timestamp for true randomness each time
-const seed = Date.now();
 const shuffledQueries = [...searchQueries].sort(() => Math.random() - 0.5);
 const selectedQueries = shuffledQueries.slice(0, 10);  // Pick 10 random languages
 
 console.log('Selected queries:', selectedQueries);
 
-// Fetch videos from selected queries
+// Fetch videos from selected queries - GET EQUAL AMOUNTS FROM EACH
 const allVideos = [];
 for (const query of selectedQueries) {
 console.log(`Searching for: ${query}`);
-const videos = await searchYouTube(query, 50);  // 50 videos per language
-allVideos.push(...videos);
+const videos = await searchYouTube(query, 10);  // Only 10 per language for balance
+
+// Take first 5 videos from each language to ensure distribution
+const selectedFromLanguage = videos.slice(0, 5);
+allVideos.push(...selectedFromLanguage);
+
 // Small delay to avoid rate limiting
 await new Promise(resolve => setTimeout(resolve, 500));
 }
+
+console.log(`Fetched ${allVideos.length} videos total from ${selectedQueries.length} languages`);
 
 // Remove duplicates
 const uniqueVideos = Array.from(new Map(allVideos.map(v => [v.id.videoId, v])).values());
@@ -179,10 +184,10 @@ const uniqueVideos = Array.from(new Map(allVideos.map(v => [v.id.videoId, v])).v
 // Shuffle the results
 const shuffledVideos = uniqueVideos.sort(() => Math.random() - 0.5);
 
-// Select EXACTLY 48 videos
+// Take up to 48 videos (we should have ~50 from 10 languages × 5 videos)
 const selectedVideos = shuffledVideos.slice(0, 48);
 
-console.log(`Selected ${selectedVideos.length} videos for display`);
+console.log(`Displaying ${selectedVideos.length} videos`);
 console.log('Languages used:', selectedQueries);
 
 return selectedVideos.map(v => ({
