@@ -80,62 +80,45 @@ border-left: 4px solid #2196f3;
 const API_KEY = 'AIzaSyBCQeWO5lhHka-2hvUeNyG2Kojqnum8eRc';
 
 // CACHED VIDEO IDs - These are updated manually each month
-// Last updated: Week 5
 const CACHED_VIDEOS = [];
 
 // Search queries in different languages for "day in the life" worker videos
 const searchQueries = [
 'day in the life worker',
 'a day in my life job',
-'día en la vida trabajo', // Spanish (Spain)
-'un día en mi vida trabajo', // Spanish variant
-'día de trabajo en mi vida', // Latin American Spanish
-'mi trabajo diario', // Spanish - daily work
-'journée dans la vie travail', // French (France)
-'une journée de travail', // French variant
-'journée de travail en Afrique', // African French
-'mon travail quotidien', // French - daily work
-'Tag im Leben Arbeit', // German
-'仕事の一日', // Japanese
-'工作中的一天', // Chinese Simplified
-'工作中的一天', // Chinese Traditional
-'我的工作日常', // Chinese - my work routine
-'职业日常', // Chinese - career daily life
-'dia na vida trabalho', // Portuguese (Brazil)
-'rotina de trabalho', // Portuguese - work routine
-'день из жизни работа', // Russian
-'мой рабочий день', // Russian - my work day
-'giorno nella vita lavoro', // Italian
-'직장인 하루', // Korean
-'일상 브이로그 직장', // Korean - daily vlog work
-'يوم في الحياة عمل', // Arabic
-'dag in het leven werk', // Dutch
-'dzień w życiu praca', // Polish
-'how I dey work', // Nigerian Pidgin
-'my work for Nigeria', // Nigerian Pidgin variant
-'วันทำงานของฉัน', // Thai
-'एक दिन मेरी नौकरी', // Hindi
-'mijn dagelijks werk', // Dutch variant
-'τη δουλειά μου', // Greek
-'işimde bir gün', // Turkish
-'pekerjaan sehari-hari', // Indonesian
-'việc làm hàng ngày' // Vietnamese
+'día en la vida trabajo',
+'un día en mi vida trabajo',
+'día de trabajo en mi vida',
+'mi trabajo diario',
+'journée dans la vie travail',
+'une journée de travail',
+'journée de travail en Afrique',
+'mon travail quotidien',
+'Tag im Leben Arbeit',
+'仕事の一日',
+'工作中的一天',
+'我的工作日常',
+'职业日常',
+'dia na vida trabalho',
+'rotina de trabalho',
+'день из жизни работа',
+'мой рабочий день',
+'giorno nella vita lavoro',
+'직장인 하루',
+'일상 브이로그 직장',
+'يوم في الحياة عمل',
+'dag in het leven werk',
+'dzień w życiu praca',
+'how I dey work',
+'my work for Nigeria',
+'วันทำงานของฉัน',
+'एक दिन मेरी नौकरी',
+'mijn dagelijks werk',
+'τη δουλειά μου',
+'işimde bir gün',
+'pekerjaan sehari-hari',
+'việc làm hàng ngày'
 ];
-
-// Get week number to ensure same videos throughout the week
-function getWeekNumber(date) {
-const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-const dayNum = d.getUTCDay() || 7;
-d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-}
-
-// Seeded random number generator for consistent results per week
-function seededRandom(seed) {
-const x = Math.sin(seed++) * 10000;
-return x - Math.floor(x);
-}
 
 async function searchYouTube(query, maxResults = 10) {
 const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=${maxResults}&key=${API_KEY}`;
@@ -199,7 +182,7 @@ title: v.snippet.title
 function displayVideos(videos) {
 document.getElementById('loading').style.display = 'none';
 const container = document.getElementById('videos');
-container.innerHTML = ''; // Clear existing
+container.innerHTML = '';
 
 videos.forEach(video => {
 const videoCard = document.createElement('div');
@@ -219,30 +202,24 @@ container.appendChild(videoCard);
 
 async function loadVideos() {
 try {
-const currentWeek = getWeekNumber(new Date());
-
 // Check if we have cached videos
-if (CACHED_VIDEOS.length === 48) {  // Changed to 48
+if (CACHED_VIDEOS.length === 48) {
 console.log('Using cached videos');
 displayVideos(CACHED_VIDEOS);
 } else {
-// No cached videos or cache is incomplete - fetch new ones
+// No cached videos - fetch new ones
 console.log('No cached videos found, fetching from API...');
-console.log('⚠️ WARNING: This uses API quota!');
 
 const newVideos = await fetchNewVideos();
 displayVideos(newVideos);
 
-// Log the new cache data that should be copied into the code
+// Log the cache data to copy
 console.log('='.repeat(80));
 console.log('📋 COPY THIS INTO YOUR CODE:');
 console.log('='.repeat(80));
 console.log(`const CACHED_VIDEOS = ${JSON.stringify(newVideos, null, 2)};`);
-console.log('');
-console.log('Week number: ' + currentWeek);
 console.log('='.repeat(80));
 }
-
 } catch (error) {
 document.getElementById('loading').style.display = 'none';
 document.getElementById('error').style.display = 'block';
@@ -252,10 +229,6 @@ console.error('Error:', error);
 }
 
 // Load videos when page loads
-loadVideos();
-</script>
-</body>
-</html>
 loadVideos();
 </script>
 </body>
